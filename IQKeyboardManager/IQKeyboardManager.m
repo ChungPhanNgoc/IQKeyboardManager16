@@ -142,10 +142,11 @@ typedef void (^SizeBlock)(CGSize size);
 }
 
 //UIKeyboard handling
+@synthesize keyboardBottom                      =   _keyboardBottom;
 @synthesize enable                              =   _enable;
 @synthesize keyboardDistanceFromTextField       =   _keyboardDistanceFromTextField;
 
-//Keyboard Appearance handling
+//Keyboard Appearance. handling
 @synthesize overrideKeyboardAppearance          =   _overrideKeyboardAppearance;
 @synthesize keyboardAppearance                  =   _keyboardAppearance;
 
@@ -690,8 +691,8 @@ typedef void (^SizeBlock)(CGSize size);
     {
         CGRect kbFrame = _kbFrame;
         
-        kbFrame.origin.y -= keyboardDistanceFromTextField;
-        kbFrame.size.height += keyboardDistanceFromTextField;
+        kbFrame.origin.y -= keyboardDistanceFromTextField + _keyboardBottom;
+        kbFrame.size.height += keyboardDistanceFromTextField + _keyboardBottom;
         
         //Calculating actual keyboard displayed size, keyboard frame may be different when hardware keyboard is attached (Bug ID: #469) (Bug ID: #381) (Bug ID: #1506)
         CGRect intersectRect = CGRectIntersection(kbFrame, keyWindow.frame);
